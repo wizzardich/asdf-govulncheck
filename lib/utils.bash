@@ -39,7 +39,7 @@ install_version() {
     fail "asdf-$TOOL_NAME supports release installs only"
   fi
 
-  if [ "$version" -eq "v0.0.0" ]; then
+  if [ "$version" == "v0.0.0" ]; then
     version="latest"
   fi
 
