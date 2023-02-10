@@ -17,7 +17,7 @@ sort_versions() {
 }
 
 list_go_module_versions() {
-  VERSIONS=$(go list -m -versions "$GO_MODULE" | tr ' ' '\n' | sed 's/^v//' | grep -e "\d\+\.\d\+\.\d\+")
+  VERSIONS=$(go list -m -versions "$GO_MODULE" | tr ' ' '\n' | sed 's/^v//' | grep -v "$GO_MODULE" || true)
 
   if [ -z "$VERSIONS" ]; then
     VERSIONS="latest"
