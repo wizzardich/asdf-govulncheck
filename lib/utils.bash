@@ -20,7 +20,7 @@ list_go_module_versions() {
   VERSIONS=$(go list -m -versions "$GO_MODULE" | tr ' ' '\n' | sed 's/^v//' | grep -v "$GO_MODULE" || true)
 
   if [ -z "$VERSIONS" ]; then
-    VERSIONS="latest"
+    VERSIONS="0.0.0"
   fi
 
   echo $VERSIONS
@@ -32,11 +32,15 @@ list_all_versions() {
 
 install_version() {
   local install_type="$1"
-  local version="$2"
+  local version="v$2"
   local install_path="${3%/bin}/bin"
 
   if [ "$install_type" != "version" ]; then
     fail "asdf-$TOOL_NAME supports release installs only"
+  fi
+
+  if [ "$version" -eq "v0.0.0" ]; then
+    version="latest"
   fi
 
   (
