@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+GO_PROJECT="golang.org/x/vuln"
 GO_MODULE="golang.org/x/vuln/cmd/govulncheck"
 TOOL_NAME="govulncheck"
 TOOL_TEST="govulncheck --help"
@@ -17,7 +18,7 @@ sort_versions() {
 }
 
 list_go_module_versions() {
-  VERSIONS=$(go list -m -versions "$GO_MODULE" | tr ' ' '\n' | sed 's/^v//' | grep -v "$GO_MODULE" || true)
+  VERSIONS=$(go list -m -versions "$GO_PROJECT" | tr ' ' '\n' | sed 's/^v//' | grep -v "$GO_PROJECT" || true)
 
   if [ -z "$VERSIONS" ]; then
     VERSIONS="0.0.0"
