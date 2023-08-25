@@ -24,7 +24,7 @@ list_go_module_versions() {
     VERSIONS="0.0.0"
   fi
 
-  echo $VERSIONS
+  echo $VERSIONS | tr ' ' '\n'
 }
 
 list_all_versions() {
